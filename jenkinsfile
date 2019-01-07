@@ -7,10 +7,10 @@ pipeline {
   agent any
   stages {
     stage(‘Cloning Git’) {
-      steps {
-        git 'gitclone https://github.com/kapilsingh421/reactapp.git'
-      }
-    }
+  steps {
+    git ‘https://github.com/kapilsingh421/reactapp.git'
+  }
+}
     stage(‘Building image’) {
       steps{
         script {
