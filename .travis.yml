@@ -6,3 +6,18 @@ before_install:
   - docker build -t abhi07/reactapp -f Dockerfile.dev .
 script:
   - docker run abhi07/reactapp npm run test -- --coverage
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-east-2-563268668703"
+  bucket_path: "docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY  
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+ 
+
+
