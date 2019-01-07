@@ -34,19 +34,14 @@ node {
       def remoteImageTag  = "${imageTag}-${BUILD_NUMBER}"
 
       def taskDefile      = "file://aws/task-definition-${remoteImageTag}.json"
-      def ecRegistry      = "https://%ACCOUNT%.dkr.ecr.eu-central-1.amazonaws.com"
+      def ecRegistry      = "https:563268668703.dkr.ecr.us-east-2.amazonaws.com/docker-demo"
 
       /*
       / node-7.0.0 is a tag name for nodejd tool installation in Jenkins server,
       / check the Global tool configuration #NodeJSInstallation section
       / this is required to be able to access npm cli tools
       */
-      def nodeHome = tool name: "node-7.0.0",
-                          type: "jenkins.plugins.nodejs.tools.NodeJSInstallation"
-
-      env.PATH = "${nodeHome}/bin:${env.PATH}"
-
-
+     
       stage("Checkout") {
         checkout scm
       }
