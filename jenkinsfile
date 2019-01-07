@@ -1,11 +1,6 @@
 node {
   ws("workspace/${env.JOB_NAME}/${env.BRANCH_NAME}") {
-    try {
-      // Notify slack, new build started!
-      stage("BUILD STARTED") {
-        slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-      }
-
+    
       final String STAGING     = "staging"
       final String PRODUCTION  = "production"
 
@@ -168,14 +163,6 @@ node {
                                   --task-definition ${taskFamily}:${taskRevision} \
                                   --desired-count 1                               \
         "
-      }
-
-      stage("BUILD SUCCEED") {
-        slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-      }
-    } catch(e) {
-      slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-      throw e
     }
   }
 }
