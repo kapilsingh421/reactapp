@@ -6,9 +6,9 @@ pipeline {
   }
   agent any
   stages {
-    stage(‘Cloning Git’) 
+    stage(‘Cloning Git’) {
       steps {
-        git 'https://github.com/kapilsingh421/reactapp.git'
+        git 'gitclone https://github.com/kapilsingh421/reactapp.git'
       }
     }
     stage(‘Building image’) {
