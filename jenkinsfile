@@ -58,7 +58,7 @@ node {
 
       stage("Docker build") {
         //  TODO: replace the ecr (repo) with the right repo name.
-        sh "docker tag -t abhi07/reactapp ."
+        sh "docker build -t abhi07/reactapp ."
       }
 
       stage("Docker push") {
