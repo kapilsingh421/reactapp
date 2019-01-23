@@ -6,6 +6,13 @@ node {
         git branch: 'master', url: 'https://github.com/kapilsingh421/edureka.git'
      
     }
+    checkout scm
+  result = sh (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
+  if (result != 0) {
+    echo "performing build..."
+  } else {
+    echo "not running..."
+  }
         
  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'report', reportFiles: 'report.html', reportName: 'Report', reportTitles: ''])
      
