@@ -7,9 +7,10 @@ node {
      
     }
     stage('verification'){
-    checkout scm
-      result = sh (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
-      if (result != 0) {
+    MESSAGE=$(git log -1 HEAD --pretty=format:%s)
+    if [[ "$MESSAGE" == "ci build" ]]; then
+      
+       (result != 0) {
         echo "performing build..."
       } else {
          currentBuild.result = 'ABORTED'
