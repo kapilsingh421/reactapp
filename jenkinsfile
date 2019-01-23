@@ -7,12 +7,12 @@ node {
      
     }
     stage('verification'){
-    MESSAGE=$(git log -1 HEAD --pretty=format:%s)
-    if [[ "$MESSAGE" == "ci skip" ]]; then
-else
-   {
-     currentBuild.result = 'ABORTED'
-    error('Stopping early…')
+   if (!(default_test.contains(branch)
+            || commit.contains("[ci]"))) {
+            echo "Branch should not be tested by default and commit message contains no [ci], aborting.."
+            currentBuild.result = "FAILURE"
+            return
+        }
   }
     stage ('build'){
     build 'test2'
