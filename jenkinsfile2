@@ -1,7 +1,7 @@
  node {
       checkout scm
       result = sh (script: "git log -1 | grep 'ci skip'", returnStatus: true)
-      if (result != 0) {
+      if (result) {
         echo "performing build..."
       } else {
          echo "Build Aborted"
