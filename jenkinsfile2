@@ -1,4 +1,5 @@
  node {
+      checkout scm
       result = sh (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
       result
       if (result != 0) {
