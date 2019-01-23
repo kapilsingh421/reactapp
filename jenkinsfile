@@ -7,14 +7,14 @@ node {
      
     }
     stage('verification'){
-    def default_test = ["develop", "release", "feature/test"]
-   if  (!(default_test.contains(branch)
-           || commit.contains("[ci]"))) {
-            echo "Branch should not be tested by default and commit message contains no [ci], aborting.."
-            currentBuild.result = 'ABORTED'
-            error('Stopping early..')
-            return
-        }
+    def check() {
+    env.CI_SKIP = "false"
+    result = sh (script: "git log -1 | grep '.*\\[ci skip\\].*'", returnStatus: true)
+    if (result == 0) {
+        env.CI_SKIP = "true"
+        error "'[ci skip]' found in git commit message. Aborting."
+    }
+}
   }
     stage ('build'){
     build 'test2'
