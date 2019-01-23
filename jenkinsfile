@@ -12,6 +12,8 @@ node {
     echo "performing build..."
   } else {
     echo "not running..."
+     currentBuild.result = 'ABORTED'
+    error('Stopping early…')
   }
   }
     stage ('build'){
