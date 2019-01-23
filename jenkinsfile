@@ -7,14 +7,15 @@ node {
      
     }
     stage('verification'){
-    def check() {
-    env.CI_SKIP = "false"
-    result = sh (script: "git log -1 | grep '.*\\[ci skip\\].*'", returnStatus: true)
-    if (result == 0) {
-        env.CI_SKIP = "true"
-        error "'[ci skip]' found in git commit message. Aborting."
+    checkout scm
+      result = sh (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
+      if (result != 0) {
+        echo "performing build..."
+      } else {
+         currentBuild.result = 'ABORTED'
+         error('Stopping early…')
+      }
     }
-}
   }
     stage ('build'){
     build 'test2'
