@@ -7,8 +7,8 @@ node {
      
     }
     stage('verification'){
-  MESSAGE=$(git log -1 HEAD --pretty=format:%s)
-  if [[ "$MESSAGE" == "ci skip" ]]; then
+    MESSAGE=$(git log -1 HEAD --pretty=format:%s)
+    if [[ "$MESSAGE" == "ci skip" ]]; then
 else
    {
      currentBuild.result = 'ABORTED'
