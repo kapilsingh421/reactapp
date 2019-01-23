@@ -5,6 +5,7 @@
       if (result != 0) {
         echo "performing build..."
       } else {
+         echo "Build Aborted"
          currentBuild.result = 'ABORTED'
          error('Stopping early…')
       }
