@@ -13,8 +13,8 @@ checkout scm
       if (result != 0) {
         echo "performing build..."
       } else {
-         currentBuild.result = 'ABORTED'
-         error('Stopping early…')
+       currentBuild.result = 'ABORTED';
+       return;
       }
   }
     stage ('build'){
