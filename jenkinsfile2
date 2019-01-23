@@ -4,6 +4,6 @@
       if (result != 0) {
         echo "performing build..."
       } else {
-        echo "not running..."
+        currentBuild.result = 'ABORTED'
       }
     }
