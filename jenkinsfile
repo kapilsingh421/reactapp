@@ -7,10 +7,11 @@ node {
      
     }
     stage('verification'){
-   if (!(default_test.contains(branch)
-            || commit.contains("[ci]"))) {
+   if 
+           commit.contains("[ci]") {
             echo "Branch should not be tested by default and commit message contains no [ci], aborting.."
-            currentBuild.result = "FAILURE"
+            currentBuild.result = 'ABORTED'
+            error('Stopping early..')
             return
         }
   }
