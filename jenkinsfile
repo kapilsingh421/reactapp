@@ -7,7 +7,9 @@ node {
      
     }
     stage('verification'){
-   
+    
+   result = sh (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
+  if (result != 0) {
      currentBuild.result = 'ABORTED'
     error('Stopping early…')
   }
