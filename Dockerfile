@@ -6,7 +6,7 @@ COPY . .
 <<<<<<< HEAD
 RUN npm run build  ##### ### ###3added file
 =======
-RUN npm run build   ################
+RUN npm run build   ######
 >>>>>>> ba2bb33aec29f07b44e182e935e5103373c25a64
 
 FROM nginx     #webserver
