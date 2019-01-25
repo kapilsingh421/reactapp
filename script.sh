@@ -1,7 +1,7 @@
 #!/bin/bash
-  result = sh (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
-  if (result != 0) {
-    echo "performing build..."
-  } else {
-    echo "not running..."
-  }
+if git log -1 | grep ci skip; then
+   echo "Running"
+else 
+curl -XPOST $BUILD_URL/stop
+fi
+ 
